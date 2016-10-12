@@ -158,7 +158,7 @@ def init_from_options(options, client=None):
                   cert_bundle=options.cert_bundle, insecure=options.insecure)
 
 def get_default_config_filename():
-    config_file = os.path.join(os.environ["HOME"], ".zuliprc")
+    config_file = "zuliprc" #os.path.join(os.environ["HOME"], ".zuliprc")
     if (not os.path.exists(config_file) and
         os.path.exists(os.path.join(os.environ["HOME"], ".humbugrc"))):
         raise RuntimeError("The Zulip API configuration file is now ~/.zuliprc; please run:\n\n  mv ~/.humbugrc ~/.zuliprc\n")
@@ -211,9 +211,9 @@ class Client(object):
             site = site.rstrip("/")
             self.base_url = site
         else:
-            self.base_url = "https://api.zulip.com"
+            self.base_url = "https://mrtalk.co.kr/api"
 
-        if self.base_url != "https://api.zulip.com" and not self.base_url.endswith("/api"):
+        if self.base_url != "https://mrtalk.co.kr/api" and not self.base_url.endswith("/api"):
             self.base_url += "/api"
         self.base_url += "/"
         self.retry_on_errors = retry_on_errors

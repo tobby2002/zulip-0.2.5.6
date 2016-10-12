@@ -3,19 +3,30 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import zulip
 
-client = zulip.Client(email="weather-bot@mrtalk.co.kr", client="MyTestClient/0.1")
-message = {
+client = zulip.Client(email="weather-bot@mrtalk.co.kr", client="ConsoleClient/0.1")
+firstmsg = "안녕하세요"
+messagefirst = {
     "type": "private",
     "to": "mr.neo@mrtalk.co.kr",
-    "content": "your content",
+    "content": firstmsg,
 }
-print(client.send_message(message))
+
+client.send_message(messagefirst)
+
+def send_message(Client, orginmsg, senderid, receiverid, client):
+
+    botmsg = orginmsg + "에 대한 봇톡"
+    message = {
+        "type": "private",
+        "to": "mr.neo@mrtalk.co.kr",
+        "content": botmsg ,
+    }
+
+    if client == "website":
+        Client.send_message(message)
 
 # Print each message the user receives
 # This is a blocking call that will run forever
-client.call_on_each_message(lambda msg: sys.stdout.write(str(msg) + "\n"))
+# client.call_on_each_message(lambda msg: sys.stdout.write("message:" + str(send_message(client,msg['content'],msg['sender_id'],msg['recipient_id'],msg['client'])) + "\n"))
+client.call_on_each_message(lambda msg: send_message(client,msg['content'],msg['sender_id'],msg['recipient_id'],msg['client']))
 
-# Print every event relevant to the user
-# This is a blocking call that will run forever
-# This will never be reached unless you comment out the previous line
-client.call_on_each_event(lambda msg: sys.stdout.write(str(msg) + "\n"))

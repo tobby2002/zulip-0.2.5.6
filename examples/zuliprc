@@ -1,4 +1,6 @@
 ; Save this file as ~/.zuliprc
 [api]
-key=<your bot's api key from the web interface>
-email=<your bot's email address>
+key=tkaFgdyzjODHpuQ0ashDg1CNszAbwW8o
+email=weather-bot@mrtalk.co.kr
+;site=https://api.zulip.com
+site=https://mrtalk.co.kr/api
